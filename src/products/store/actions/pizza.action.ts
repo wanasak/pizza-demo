@@ -18,8 +18,6 @@ export enum PizzaActionTypes {
  */
 export class LoadPizzasAction implements Action {
   readonly type = PizzaActionTypes.LOAD_PIZZAS;
-
-  constructor(public payload: any) {}
 }
 
 export class LoadPizzaSuccessAction implements Action {
