@@ -5,7 +5,7 @@ import { map, switchMap, catchError } from "rxjs/operators";
 
 import { Pizza } from "../../models/pizza.model";
 import { PizzasService } from "../../services";
-import * as pizzaActions from "../actions/pizza.action";
+import * as pizzaActions from "../actions/pizzas.action";
 
 @Injectable()
 export class PizzaEffects {
