@@ -2,13 +2,13 @@ import { Pizza } from "./../../models/pizza.model";
 import * as pizzaAction from "../actions/pizza.action";
 
 export interface PizzaState {
-  data: Pizza[];
+  entities: { [id: number]: Pizza }
   loaded: boolean;
   loading: boolean;
 }
 
 const initialState: PizzaState = {
-  data: [],
+  entities: {},
   loaded: false,
   loading: false
 };
@@ -26,13 +26,16 @@ export function reducer(
     }
 
     case pizzaAction.PizzaActionTypes.LOAD_PIZZA_SUCCESS: {
-      const data = action.payload;
+      const pizzas = action.payload;
+      const entities = pizzas.reduce((entities: { [id: number]: Pizza }, pizza) => {
+        return { ...entities, [pizza.id]: pizza }
+      }, { ...state.entities }); 
 
       return {
         ...state,
         loading: false,
         loaded: true,
-        data
+        entities
       };
     }
 
@@ -52,4 +55,4 @@ export function reducer(
 
 export const getPizzaLoading = (state: PizzaState) => state.loading;
 export const getPizzaLoaded = (state: PizzaState) => state.loaded;
-export const getPizzas = (state: PizzaState) => state.data;
+export const getPizzasEntities = (state: PizzaState) => state.entities;
