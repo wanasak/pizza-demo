@@ -1,3 +1,5 @@
+import { CustomSerializer } from './store/reducers';
+import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
@@ -41,8 +43,12 @@ export const ROUTES: Routes = [
     RouterModule.forRoot(ROUTES),
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([]),
+    StoreRouterConnectingModule,
     environment.development ? StoreDevtoolsModule.instrument() : [],
   ],
+  providers: [{
+    provide: RouterStateSerializer, useClass: CustomSerializer
+  }],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
 })
