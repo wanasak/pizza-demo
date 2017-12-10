@@ -1,4 +1,4 @@
-import { reducers } from './store/reducers/index';
+import { reducers } from './store/reducers';
 import { StoreModule } from '@ngrx/store';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -37,7 +37,7 @@ export const ROUTES: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forChild(ROUTES),
-    StoreModule.forFeature('products', {reducers})
+    StoreModule.forFeature('products', reducers)
   ],
   providers: [...fromServices.services],
   declarations: [...fromContainers.containers, ...fromComponents.components],
