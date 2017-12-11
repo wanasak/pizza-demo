@@ -8,6 +8,7 @@ import { map, switchMap, catchError } from "rxjs/operators";
 import { Pizza } from "../../models/pizza.model";
 import { PizzasService } from "../../services";
 import * as pizzaActions from "../actions/pizzas.action";
+import * as fromRoot from "../../../app/store";
 
 @Injectable()
 export class PizzaEffects {
@@ -70,5 +71,30 @@ export class PizzaEffects {
             catchError(err => of(new pizzaActions.DeletePizzaFailAction(err)))
           );
       })
+    );
+
+  @Effect()
+  createPizzaSuccess$ = this.actions$
+    .ofType(pizzaActions.PizzaActionTypes.CREATE_PIZZA_SUCCESS)
+    .pipe(
+      map((action: pizzaActions.CreatePizzaSuccessAction) => action.payload),
+      map(pizza => new fromRoot.GoAction({
+        path: ["/products", pizza.id]
+      }))
+    );
+
+  @Effect()
+  handlePizzaSuccess$ = this.actions$
+    .ofType(
+      pizzaActions.PizzaActionTypes.UPDATE_PIZZA_SUCCESS,
+      pizzaActions.PizzaActionTypes.DELETE_PIZZA_SUCCESS
+    )
+    .pipe(
+      map(
+        pizza =>
+          new fromRoot.GoAction({
+            path: ["/products"]
+          })
+      )
     );
 }
