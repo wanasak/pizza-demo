@@ -25,7 +25,7 @@ export function reducer(
       };
     }
 
-    case pizzaAction.PizzaActionTypes.LOAD_PIZZA_SUCCESS: {
+    case pizzaAction.PizzaActionTypes.LOAD_PIZZAS_SUCCESS: {
       const pizzas = action.payload;
       const entities = pizzas.reduce((entities: { [id: number]: Pizza }, pizza) => {
         return { ...entities, [pizza.id]: pizza }
@@ -39,12 +39,25 @@ export function reducer(
       };
     }
 
-    case pizzaAction.PizzaActionTypes.LOAD_PIZZA_FAIL: {
+    case pizzaAction.PizzaActionTypes.LOAD_PIZZAS_FAIL: {
       return {
         ...state,
         loading: false,
         loaded: false
       };
+    }
+
+    case pizzaAction.PizzaActionTypes.CREATE_PIZZA_SUCCESS: {
+      const pizza = action.payload;
+      const entities = {
+        ...state.entities,
+        [pizza.id]: pizza
+      }
+
+      return {
+        ...state,
+        entities
+      }
     }
 
     default: {

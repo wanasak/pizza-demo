@@ -7,8 +7,11 @@ import { Action } from "@ngrx/store";
  */
 export enum PizzaActionTypes {
   LOAD_PIZZAS = "[Pizza] LOAD_PIZZAS",
-  LOAD_PIZZA_SUCCESS = "[Pizza] LOAD_PIZZA_SUCCESS",
-  LOAD_PIZZA_FAIL = "[Pizza] LOAD_PIZZA_FAIL"
+  LOAD_PIZZAS_SUCCESS = "[Pizza] LOAD_PIZZAS_SUCCESS",
+  LOAD_PIZZAS_FAIL = "[Pizza] LOAD_PIZZAS_FAIL",
+  CREATE_PIZZA = "[Pizza] CREATE_PIZZA",
+  CREATE_PIZZA_SUCCESS = "[Pizza] CREATE_PIZZA_SUCCESS",
+  CREATE_PIZZA_FAIL = "[Pizza] CREATE_PIZZA_FAIL",
 }
 
 /**
@@ -21,13 +24,31 @@ export class LoadPizzasAction implements Action {
 }
 
 export class LoadPizzaSuccessAction implements Action {
-  readonly type = PizzaActionTypes.LOAD_PIZZA_SUCCESS;
+  readonly type = PizzaActionTypes.LOAD_PIZZAS_SUCCESS;
 
   constructor(public payload: Pizza[]) {}
 }
 
 export class LoadPizzaFailAction implements Action {
-  readonly type = PizzaActionTypes.LOAD_PIZZA_FAIL;
+  readonly type = PizzaActionTypes.LOAD_PIZZAS_FAIL;
+
+  constructor(public payload: any) {}
+}
+
+export class CreatePizzaAction implements Action {
+  readonly type = PizzaActionTypes.CREATE_PIZZA;
+
+  constructor(public payload: Pizza) { }
+}
+
+export class CreatePizzaSuccessAction implements Action {
+  readonly type = PizzaActionTypes.CREATE_PIZZA_SUCCESS;
+
+  constructor(public payload: Pizza) {}
+}
+
+export class CreatePizzaFailAction implements Action {
+  readonly type = PizzaActionTypes.CREATE_PIZZA_FAIL;
 
   constructor(public payload: any) {}
 }
@@ -39,4 +60,7 @@ export class LoadPizzaFailAction implements Action {
 export type PizzaActions =
   | LoadPizzasAction
   | LoadPizzaSuccessAction
-  | LoadPizzaFailAction;
+  | LoadPizzaFailAction
+  | CreatePizzaAction
+  | CreatePizzaSuccessAction
+  | CreatePizzaFailAction;

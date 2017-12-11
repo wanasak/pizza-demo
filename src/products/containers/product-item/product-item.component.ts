@@ -52,7 +52,10 @@ export class ProductItemComponent implements OnInit {
   onSelect(event: number[]) {
     this.store.dispatch(new fromStore.VisualiseToppingsAction(event));
   }
-  onCreate(event: Pizza) { }
+
+  onCreate(event: Pizza) { 
+    this.store.dispatch(new fromStore.CreatePizzaAction(event));
+  }
   onUpdate(event: Pizza) { }
   onRemove(event: Pizza) { }
 
