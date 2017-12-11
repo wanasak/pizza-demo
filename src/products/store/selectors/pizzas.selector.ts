@@ -23,7 +23,7 @@ export const getPizzasLoading = createSelector(
 );
 export const getPizzasLoaded = createSelector(
   getPizzaState,
-  fromPizzas.getPizzaLoading
+  fromPizzas.getPizzaLoaded
 );
 export const getSelectedPizza = createSelector(
   getPizzaEntities,
