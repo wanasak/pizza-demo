@@ -29,3 +29,8 @@ export const getToppingsLoaded = createSelector(
     getToppingsState,
     fromToppings.getToppingsLoaded
 )
+
+export const getSeletedToppings = createSelector(
+    getToppingsState,
+    fromToppings.getSelectedToppings
+)

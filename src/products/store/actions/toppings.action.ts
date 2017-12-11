@@ -8,7 +8,8 @@ import { Action } from "@ngrx/store";
 export enum ToppingsActionTypes {
   LOAD_TOPPINGS = "[Toppings] LOAD_TOPPINGS",
   LOAD_TOPPINGS_SUCCESS = "[Toppings] LOAD_TOPPINGS_SUCCESS",
-  LOAD_TOPPINGS_FAIL = "[Toppings] LOAD_TOPPINGS_FAIL"
+  LOAD_TOPPINGS_FAIL = "[Toppings] LOAD_TOPPINGS_FAIL",
+  VISUALISE_TOPPINGS = "[Toppings] VISUALISE_TOPPINGS"
 }
 
 /**
@@ -32,6 +33,12 @@ export class LoadToppingsFailAction implements Action {
   constructor(public payload: any) {}
 }
 
+export class VisualiseToppingsAction implements Action {
+  readonly type = ToppingsActionTypes.VISUALISE_TOPPINGS;
+
+  constructor(public payload: number[]) {}
+}
+
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
@@ -39,4 +46,5 @@ export class LoadToppingsFailAction implements Action {
 export type ToppingsActions =
   | LoadToppingsAction
   | LoadToppingsSuccessAction
-  | LoadToppingsFailAction;
+  | LoadToppingsFailAction
+  | VisualiseToppingsAction;
