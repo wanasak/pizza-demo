@@ -15,6 +15,9 @@ export enum PizzaActionTypes {
   UPDATE_PIZZA = "[Pizza] UPDATE_PIZZA",
   UPDATE_PIZZA_SUCCESS = "[Pizza] UPDATE_PIZZA_SUCCESS",
   UPDATE_PIZZA_FAIL = "[Pizza] UPDATE_PIZZA_FAIL",
+  DELETE_PIZZA = "[Pizza] DELETE_PIZZA",
+  DELETE_PIZZA_SUCCESS = "[Pizza] DELETE_PIZZA_SUCCESS",
+  DELETE_PIZZA_FAIL = "[Pizza] DELETE_PIZZA_FAIL",
 }
 
 /**
@@ -74,6 +77,24 @@ export class UpdatePizzaFailAction implements Action {
   constructor(public payload: any) {}
 }
 
+export class DeletePizzaAction implements Action {
+  readonly type = PizzaActionTypes.DELETE_PIZZA;
+
+  constructor(public payload: Pizza) { }
+}
+
+export class DeletePizzaSuccessAction implements Action {
+  readonly type = PizzaActionTypes.DELETE_PIZZA_SUCCESS;
+
+  constructor(public payload: Pizza) {}
+}
+
+export class DeletePizzaFailAction implements Action {
+  readonly type = PizzaActionTypes.DELETE_PIZZA_FAIL;
+
+  constructor(public payload: any) {}
+}
+
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
@@ -87,5 +108,8 @@ export type PizzaActions =
   | CreatePizzaFailAction
   | UpdatePizzaAction
   | UpdatePizzaSuccessAction
-  | UpdatePizzaFailAction;
+  | UpdatePizzaFailAction
+  | DeletePizzaAction
+  | DeletePizzaSuccessAction
+  | DeletePizzaFailAction;
 

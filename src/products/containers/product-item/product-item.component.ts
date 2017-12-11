@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Component, OnInit } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs/Observable";
 
-import { Pizza } from '../../models/pizza.model';
-import { Topping } from '../../models/topping.model';
-import * as fromStore from '../../store';
-import { tap } from 'rxjs/operators/tap';
+import { Pizza } from "../../models/pizza.model";
+import { Topping } from "../../models/topping.model";
+import * as fromStore from "../../store";
+import { tap } from "rxjs/operators/tap";
 
 @Component({
-  selector: 'product-item',
-  styleUrls: ['product-item.component.scss'],
+  selector: "product-item",
+  styleUrls: ["product-item.component.scss"],
   template: `
     <div 
       class="product-item">
@@ -25,26 +25,23 @@ import { tap } from 'rxjs/operators/tap';
         </pizza-display>
       </pizza-form>
     </div>
-  `,
+  `
 })
 export class ProductItemComponent implements OnInit {
   pizza$: Observable<Pizza>;
   visualise$: Observable<Pizza>;
   toppings$: Observable<Topping[]>;
 
-  constructor(private store: Store<fromStore.ProductsState>) { }
-  
+  constructor(private store: Store<fromStore.ProductsState>) {}
+
   ngOnInit() {
-    this.pizza$ = this.store.select(fromStore.getSelectedPizza)
-      .pipe(
-        tap((pizza: Pizza = null) => {
-          const pizzaExist = !!(pizza && pizza.toppings);
-          const toppings = pizzaExist
-            ? pizza.toppings.map(t => t.id)
-            : [];
-          this.store.dispatch(new fromStore.VisualiseToppingsAction(toppings));
-        })
-      );
+    this.pizza$ = this.store.select(fromStore.getSelectedPizza).pipe(
+      tap((pizza: Pizza = null) => {
+        const pizzaExist = !!(pizza && pizza.toppings);
+        const toppings = pizzaExist ? pizza.toppings.map(t => t.id) : [];
+        this.store.dispatch(new fromStore.VisualiseToppingsAction(toppings));
+      })
+    );
     this.toppings$ = this.store.select(fromStore.getAllToppings);
     this.visualise$ = this.store.select(fromStore.getPizzaVisualise);
   }
@@ -53,13 +50,18 @@ export class ProductItemComponent implements OnInit {
     this.store.dispatch(new fromStore.VisualiseToppingsAction(event));
   }
 
-  onCreate(event: Pizza) { 
+  onCreate(event: Pizza) {
     this.store.dispatch(new fromStore.CreatePizzaAction(event));
   }
-  onUpdate(event: Pizza) { 
+  onUpdate(event: Pizza) {
     this.store.dispatch(new fromStore.UpdatePizzaAction(event));
   }
-  onRemove(event: Pizza) { }
+  onRemove(event: Pizza) {
+    const remove = window.confirm("Are you sure?");
+    if (remove) {
+      this.store.dispatch(new fromStore.DeletePizzaAction(event));
+    }
+  }
 
   // constructor(
   //   private pizzaService: PizzasService,

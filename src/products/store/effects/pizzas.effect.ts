@@ -56,4 +56,19 @@ export class PizzaEffects {
           );
       })
     );
+
+  @Effect()
+  deletePizza$: Observable<Action> = this.actions$
+    .ofType(pizzaActions.PizzaActionTypes.DELETE_PIZZA)
+    .pipe(
+      map((action: pizzaActions.DeletePizzaAction) => action.payload),
+      switchMap(pizza => {
+        return this.pizzaService
+          .removePizza(pizza)
+          .pipe(
+            map(() => new pizzaActions.DeletePizzaSuccessAction(pizza)),
+            catchError(err => of(new pizzaActions.DeletePizzaFailAction(err)))
+          );
+      })
+    );
 }
