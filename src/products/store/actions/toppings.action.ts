@@ -29,7 +29,7 @@ export class LoadToppingsSuccessAction implements Action {
 export class LoadToppingsFailAction implements Action {
   readonly type = ToppingsActionTypes.LOAD_TOPPINGS_FAIL;
 
-  constructor(public payload: Topping[]) {}
+  constructor(public payload: any) {}
 }
 
 /**
