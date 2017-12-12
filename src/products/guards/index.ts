@@ -1,5 +1,5 @@
 import { PizzasGuard } from './pizza.guard';
-import { PizzaExistGuard } from 'src/products/guards/pizza-exist.guard';
+import { PizzaExistGuard } from './pizza-exist.guard';
 
 export const guards: any[] = [PizzasGuard, PizzaExistGuard];
 

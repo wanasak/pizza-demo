@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
 import { Store } from '@ngrx/store';
-import * as fromStore from '../store';
-import { tap, take, filter, map, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
+import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { Pizza } from 'src/products/models/pizza.model';
+
+import * as fromStore from '../store';
 
 @Injectable()
 export class PizzaExistGuard implements CanActivate {
